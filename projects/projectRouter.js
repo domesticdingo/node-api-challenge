@@ -5,6 +5,8 @@ const Actions = require('../data/helpers/actionModel');
 
 const router = express.Router();
 
+//  V VALIDATION V
+
 //Checking that project ID exists in database
 const validateProjId = (req, res, next) => {
     const project = req.params.id;
@@ -36,12 +38,14 @@ const validateAction = (req, res, next) => {
 
     if (!action.project_id || !action.description || !action.notes) {
         res.status(400).json({ error: "Please check action has all necessary requirements. Expecting a project ID, description, and notes." })
-    } else if (action.description.length < 128) {
+    } else if (action.description.length < 129) {
         next();
     } else {
         res.status(400).json({ error: "Error adding action. Description has a character limit of 128 characters." })
     }
 }
+
+//  V ENDPOINTS V
 
 //Show all projects +
 router.get('/', (req, res) => {
@@ -141,10 +145,11 @@ router.put('/:projectId/actions/:actionId', validateProjId, validateAction, (req
 })
 
 //Delete action for a project +
-router.delete('/:id/actions', validateProjId, (req, res) => {
-    id = req.params.id;
+router.delete('/:projectId/actions/:actionId', validateProjId, (req, res) => {
+    projectId = req.params.projectId;
+    actionId = req.params.actionId;
 
-    Actions.remove(id)
+    Actions.remove(actionId)
         .then(act => res.status(200).json(act))
         .catch(err => {
             console.log(err);
