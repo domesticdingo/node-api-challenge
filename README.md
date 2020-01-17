@@ -40,13 +40,23 @@ Demonstrate your understanding of this Sprint's concepts by answering the follow
 
 - [ ] Mention two parts of Express that you learned about this week.
 
+Routing methods like .get, .post, and the like. It also handles middleware for your endpoints
+
 - [ ] Describe Middleware?
+
+Middleware is other software we can use with express to give us more abilities with our server. For example, "server.use(express.json());" gives the server the ability to parse JSON content from the body the client sends.
 
 - [ ] Describe a Resource?
 
+A resource is something that the client and the server agree to work with, for instance it could be a user object with { username: '', password: '' }, which would be stored in the database from the backend.
+
 - [ ] What can the API return to help clients know if a request was successful?
 
+The API sends back status codes, for instance a 200 would be a successful response to a request.
+
 - [ ] How can we partition our application into sub-applications?
+
+Using different routers to handle different paths, and different database files to handle different types of objects.
 
 ## Minimum Viable Product
 
