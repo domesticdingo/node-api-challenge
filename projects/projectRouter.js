@@ -126,18 +126,19 @@ router.post('/:id/actions', validateProjId, validateAction, (req, res) => {
         })
 })
 
-//Update action for a project
-// router.put('/:id/actions', validateProjId, validateAction, (req, res) => {
-//     action = req.body;
-//     id = req.params.id;
+//Update action for a project +
+router.put('/:projectId/actions/:actionId', validateProjId, validateAction, (req, res) => {
+    action = req.body;
+    projectId = req.params.projectId;
+    actionId = req.params.actionId;
 
-//     Actions.update(id, action)
-//         .then(act => res.status(200).json(act))
-//         .catch(err => {
-//             console.log(err);
-//             res.status(500).json({ error: "There was an error updating the action." })
-//         })
-// })
+    Actions.update(actionId, action)
+        .then(act => res.status(200).json(act))
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({ error: "There was an error updating the action." })
+        })
+})
 
 //Delete action for a project +
 router.delete('/:id/actions', validateProjId, (req, res) => {
